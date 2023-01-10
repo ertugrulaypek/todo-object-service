@@ -1,0 +1,185 @@
+openapi: 3.0.1
+info:
+    title: ToDo API
+    description: >-
+        The ToDo API manages a ToDo list.
+    version: 1.0.0
+servers:
+    - url: https://uu8ghnsh1m.execute-api.us-east-2.amazonaws.com/test
+tags:
+    - name: ToDo Handler
+paths:
+    /v1/todo:
+        get:
+            tags:
+                - ToDo Handler
+            summary: Get all ToDo objects
+            description: ToDo-API-Handler (Get all ToDo objects)
+            responses:
+                '200':
+                    description: Operation successful
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/ToDo'
+                '400':
+                    description: Operation not successful
+                    content:
+                        application/json:
+                            example:
+                                error: There was an error when loading the ToDo objects.
+        post:
+            tags:
+                - ToDo Handler
+            summary: Create a new ToDo object
+            description: ToDo-API-Handler (Create a new ToDo object)
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/CreateUpdateToDo'
+                required: false
+            responses:
+                '201':
+                    description: Operation successful
+                    content:
+                        application/json:
+                            example:
+                                message: ToDo object created successfully.
+                '400':
+                    description: Operation not successful
+                    content:
+                        application/json:
+                            example:
+                                error: There was an error when creating the ToDo object.
+    /v1/todo/{todo_id}:
+        get:
+            tags:
+                - ToDo Handler
+            summary: Get a single ToDo object by its ID
+            description: ToDo-API-Handler (Get a single ToDo object)
+            parameters:
+                - name: todo_id
+                  in: path
+                  required: true
+                  schema:
+                      type: string
+            responses:
+                '200':
+                    description: Operation successful
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ToDo'
+                '400':
+                    description: Operation not successful
+                    content:
+                        application/json:
+                            example:
+                                error: There was an error when loading the ToDo object.
+                '404':
+                    description: Object not found
+                    content:
+                        application/json:
+                            example:
+                                error: The object with the provided ID could not be found.
+        put:
+            tags:
+                - ToDo Handler
+            summary: Update an existing ToDo object
+            description: ToDo-API-Handler (Update an existing ToDo object)
+            parameters:
+                - name: todo_id
+                  in: path
+                  required: true
+                  schema:
+                      type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/CreateUpdateToDo'
+                required: false
+            responses:
+                '201':
+                    description: Operation successful
+                    content:
+                        application/json:
+                            example:
+                                message: ToDo object updated successfully.
+                '400':
+                    description: Operation not successful
+                    content:
+                        application/json:
+                            example:
+                                error: There was an error while updating a new ToDo object.
+                '404':
+                    description: Object not found
+                    content:
+                        application/json:
+                            example:
+                                error: The object with the provided ID could not be found.
+        delete:
+            tags:
+                - ToDo Handler
+            summary: Delete an existing ToDo object
+            description: ToDo-API-Handler (Delete an existing ToDo object)
+            parameters:
+                - name: todo_id
+                  in: path
+                  required: true
+                  schema:
+                      type: string
+            responses:
+                '200':
+                    description: Operation successful
+                    content:
+                        application/json:
+                            example:
+                                message: ToDo object deleted successfully.
+                '400':
+                    description: Operation not successful
+                    content:
+                        application/json:
+                            example:
+                                error: There has been an error when deleting the ToDo object.
+                '404':
+                    description: Object not found
+                    content:
+                        application/json:
+                            example:
+                                error: The object with the provided ID could not be found.
+components:
+    schemas:
+        ToDo:
+            required:
+                - id
+                - title
+                - description
+            type: object
+            properties:
+                id:
+                    type: string
+                title:
+                    type: string
+                description:
+                    type: string
+            example:
+                id: "bb73670b-d5e6-42af-9e5a-ce4797841d3d"
+                title: "API"
+                description: "Create an API that meets the requirements"
+        CreateUpdateToDo:
+            required:
+                - title
+                - description
+            type: object
+            properties:
+                title:
+                    type: string
+                description:
+                    type: string
+            example:
+                title: "API"
+                description: "Create an API that meets the requirements"
