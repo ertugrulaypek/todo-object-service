@@ -5,7 +5,7 @@ info:
         The ToDo API manages a ToDo list.
     version: 1.0.0
 servers:
-    - url: https://uu8ghnsh1m.execute-api.us-east-2.amazonaws.com/test
+    - url: https://yoh7dzim06.execute-api.us-east-2.amazonaws.com/test
 tags:
     - name: ToDo Handler
 paths:
