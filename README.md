@@ -10,7 +10,7 @@ Since the expected load is low and rare, it is deployed to AWS using API Gateway
 
 ## Testing deployed instance
 
-A deployed instance running on AWS can be found [here](https://uu8ghnsh1m.execute-api.us-east-2.amazonaws.com/test). One can upload the openapi.yml file to https://editor.swagger.io/ and interact with the instance.
+A deployed instance running on AWS can be found [here](https://yoh7dzim06.execute-api.us-east-2.amazonaws.com/test). One can upload the openapi.yml file to https://editor.swagger.io/ and interact with the instance.
 
 ## Deploying from scratch
 
